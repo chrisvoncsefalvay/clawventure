@@ -1,4 +1,4 @@
-# Clawventure -- interactive fiction engine for Claude Code
+# Clawventure - interactive fiction engine for Claude Code
 
                                                                            
                                                                            

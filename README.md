@@ -171,3 +171,8 @@ v2.0.0 introduces the directory-based setting format. The engine still supports 
 ## Licence
 
 Oh, for the love of fuck. Just do whatever.
+
+
+---
+
+_Made with ❤️ by 👨‍🔬 Chris and 🐕‍🦺 Oliver in the ⛰️ Mile High City._

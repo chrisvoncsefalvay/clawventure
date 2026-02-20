@@ -1,0 +1,685 @@
+{
+  "meta": {
+    "title": "The Last Broadcast",
+    "theme": "Post-apocalyptic",
+    "tone": "Wry and sardonic -- dark humour, sharp observations, characters who cope with the end of the world by being clever about it",
+    "description": "Relay is a settlement of roughly forty people, built in the shadow of a radio tower that has been broadcasting an automated emergency signal since before anyone alive can remember. The tower drew people in: traders, scavengers, the desperate and the stubborn. Over the years, a community took root.\n\nThree days ago, the signal changed. The old loop cut out and a voice replaced it -- fragmented, half-drowned in static, speaking coordinates and names and what might be warnings. Since then, two settlers have vanished, the water has started tasting wrong, and the settlement's self-appointed Mayor has been locking doors she never locked before.\n\nBeneath Relay, something very old is waking up. A pre-war artificial intelligence, dormant in a bunker under the settlement's water supply, has begun powering its systems back on. It is not malevolent -- it is confused, fragmented, and reaching out the only way it knows how: through the tower. The contaminated water is a side effect. The disappearances are people who followed its coordinates into the flooded tunnels below. The question is not whether the AI exists, but what to do about it.",
+    "created": "2026-02-18"
+  },
+
+  "locations": {
+    "relay_square": {
+      "name": "Relay Square",
+      "description": "The heart of the settlement is a cracked concrete plaza where someone has arranged market stalls made from car bonnets and corrugated iron. The air smells of wood smoke and the chemical tang of purified water. A hand-painted sign reads RELAY -- POP. 40ish -- DEPENDS ON THE WEEK. The radio tower looms to the north, its rust-red lattice rising above everything else like a skeletal finger pointed at the sky. To the east, a cluster of shacks on stilts perches above what used to be a multi-storey car park. To the west, the scrapyard sprawls in a chaos of salvaged metal.",
+      "on_revisit": "Relay Square is busy as ever -- settlers haggling over rations, children playing between the stalls, the tower watching over it all.",
+      "details": "The market stalls are surprisingly well-organised. Someone has chalked prices on a blackboard: water rations, scrap metal by weight, ammunition (ASK CUTTER -- IF YOU DARE). Near the base of the tower, a medical tent bears a faded red cross. A woman with grey hair sits outside it, reading. Nearby, another woman leans against a support beam, arms crossed, watching the square with the expression of someone who owns the place and is not entirely sure she wanted to.",
+      "connections": {
+        "north": "the_tower",
+        "east": "the_stilts",
+        "west": "the_scrapyard"
+      },
+      "items": [],
+      "npcs": ["mags", "doc_olsen"],
+      "conditions": {},
+      "events": []
+    },
+
+    "the_tower": {
+      "name": "The Radio Tower",
+      "description": "The tower is taller than it looks from a distance -- a lattice of rust-coloured steel that groans softly in the wind like something in pain. At its base, a concrete bunker serves as the operations room, banks of old equipment blinking with lights that have no business still working. Speakers mounted on the exterior crackle with static and, beneath the static, a voice. It sounds like someone speaking from the bottom of a well. A young man sits in a battered office chair, headphones around his neck, watching a signal meter with the focus of someone who has not slept enough.",
+      "on_revisit": "The tower hums and crackles. Pike is at his station, headphones on, watching the signal meter.",
+      "details": "The equipment is a patchwork of pre-war electronics and improvised repairs -- circuit boards held together with solder and prayer. A heavy steel door at the back of the bunker leads to a stairwell going up, secured with a padlock that looks considerably newer than everything else. Someone has scratched NOT YOUR BUSINESS into the door frame. The signal meter fluctuates in a pattern that is almost, but not quite, regular -- like a heartbeat with an arrhythmia.",
+      "connections": {
+        "south": "relay_square",
+        "up the stairwell": "transmitter_room"
+      },
+      "items": [],
+      "npcs": ["pike"],
+      "conditions": {},
+      "events": [
+        {
+          "trigger": "on_enter",
+          "trigger_detail": null,
+          "condition": {
+            "has_flag": null,
+            "has_item": "old_radio",
+            "quest_at_stage": null
+          },
+          "once": true,
+          "narrative": "Your radio buzzes in your pack, the signal suddenly stronger this close to the tower. Through the static, you catch fragments: '...coordinates seven-seven-north... personnel status unknown... if you can hear this...' The voice is calm, measured, and unmistakably artificial -- not a recording on loop, but something generating speech in real time.",
+          "effects": {
+            "set_flag": "heard_signal_close",
+            "add_item": null,
+            "remove_item": null,
+            "advance_quest": null,
+            "move_npc": null,
+            "unlock_location": null,
+            "adjust_disposition": null
+          }
+        }
+      ]
+    },
+
+    "transmitter_room": {
+      "name": "The Transmitter Room",
+      "description": "The stairwell opens into a cramped room at the top of the tower, dominated by a bank of transmitter equipment that hums with purpose. Through the narrow windows, you can see the entire settlement laid out below -- tiny and fragile. The equipment here is different from the patchwork downstairs: sleek, military-grade, and covered in dust except where someone has recently wiped panels clean. A central console glows with a soft amber light, and the signal is deafening up here, the voice filling the room without speakers, as if the walls themselves are vibrating.",
+      "on_revisit": "The transmitter room hums. The amber console light pulses steadily, like something breathing.",
+      "details": "The console has a data port that looks compatible with pre-war diagnostic equipment. Below it, a small panel has been pried open -- recently, judging by the fresh scratches on the metal. Inside the panel, a slot sits empty, labelled OVERRIDE MODULE. Someone has been here before you. The transmitter logs, if you could read them, would show the signal change happened at 03:47 three days ago -- the exact time the settlement's water started tasting odd.",
+      "connections": {
+        "down the stairwell": "the_tower"
+      },
+      "items": [],
+      "npcs": [],
+      "conditions": {
+        "locked": {
+          "requires_item": "transmitter_key",
+          "requires_flag": null,
+          "description": "A heavy steel door blocks the stairwell, secured with a padlock. The lock is sturdy and new -- someone is keeping this room deliberately sealed. You would need the key."
+        }
+      },
+      "events": [
+        {
+          "trigger": "on_use_item",
+          "trigger_detail": "signal_decoder",
+          "condition": {
+            "has_flag": null,
+            "has_item": null,
+            "quest_at_stage": null
+          },
+          "once": true,
+          "narrative": "You connect the signal decoder to the console's data port. Numbers cascade across the decoder's cracked screen -- frequency analysis, signal origin triangulation, transmission metadata. The decoder beeps twice, then displays its conclusion in blocky green text: SIGNAL ORIGIN: LOCAL. DEPTH: 40M BELOW SURFACE. COORDINATES MATCH CURRENT POSITION. The signal is not coming from somewhere else. It is coming from directly beneath your feet. As the decoder finishes its work, something clicks inside the open panel below the console, and a small chip slides into view -- an override module, previously locked behind an electronic catch that the decoder just tripped.",
+          "effects": {
+            "set_flag": "signal_traced",
+            "add_item": null,
+            "remove_item": null,
+            "advance_quest": {"the_signal": 4},
+            "move_npc": null,
+            "unlock_location": null,
+            "adjust_disposition": null
+          }
+        },
+        {
+          "trigger": "on_use_item",
+          "trigger_detail": "signal_decoder",
+          "condition": {
+            "has_flag": null,
+            "has_item": null,
+            "quest_at_stage": null
+          },
+          "once": true,
+          "narrative": "The override chip sits in the open panel, waiting to be taken.",
+          "effects": {
+            "set_flag": "console_opened",
+            "add_item": null,
+            "remove_item": null,
+            "advance_quest": null,
+            "move_npc": null,
+            "unlock_location": null,
+            "adjust_disposition": null
+          }
+        }
+      ]
+    },
+
+    "the_stilts": {
+      "name": "The Stilts",
+      "description": "A cluster of shacks and lean-tos perched on concrete stilts above a flooded car park, connected by walkways of salvaged planking that creak underfoot. Laundry lines strung between the structures give the place the look of a ship dressed with signal flags. Below, dark water glints between the pillars, its surface broken occasionally by bubbles rising from somewhere deeper. The air here is damp and carries a faint metallic smell that was not there a week ago.",
+      "on_revisit": "The Stilts creak and sway gently. Laundry flaps in the breeze. The dark water below is still.",
+      "details": "Most of the shacks are locked or occupied, but one at the end of the walkway has its door ajar. A hand-lettered sign reads PIKE in uneven capitals. Inside, the space is a nest of radio parts, signal charts, and scribbled notes. A journal sits on the makeshift desk, its pages bristling with bookmarks made from torn strips of ration packaging. The flooding below seems to be rising -- water marks on the stilts show it is a good half-metre higher than the oldest marks.",
+      "connections": {
+        "west": "relay_square",
+        "down into the water": "the_underfloods"
+      },
+      "items": ["pikes_journal"],
+      "npcs": [],
+      "conditions": {},
+      "events": []
+    },
+
+    "the_scrapyard": {
+      "name": "The Scrapyard",
+      "description": "A cathedral of junk. Rusted car bodies stacked three high form the walls, and the aisles between them are lined with shelves of sorted salvage: bolts in one tin, circuit boards in another, lengths of copper wire coiled like sleeping snakes. At the centre of this ordered chaos, a lean man with quick eyes sits behind a counter made from a flattened oil drum, polishing something with a rag. A hand-painted sign above his head reads CUTTER'S -- FAIR DEALS -- MOSTLY. To the north, a path winds through the wreckage toward the old water treatment plant.",
+      "on_revisit": "The scrapyard is unchanged -- Cutter presides over his empire of junk, polishing and appraising.",
+      "details": "Behind the counter, Cutter has organised his premium stock: pre-war electronics in various states of decay, medical supplies in a locked cabinet, and a shelf of items labelled WEIRD BUT INTERESTING. Among the weird-but-interesting shelf, a device with a cracked screen and a data port catches your eye -- it looks like it was built to interface with radio equipment. A faded label reads SIGDEC-7 FIELD ANALYSER.",
+      "connections": {
+        "east": "relay_square",
+        "north": "the_reservoir"
+      },
+      "items": ["medical_supplies", "signal_decoder"],
+      "npcs": ["cutter"],
+      "conditions": {},
+      "events": []
+    },
+
+    "the_reservoir": {
+      "name": "The Reservoir",
+      "description": "The old water treatment plant squats at the edge of the settlement like a concrete toad. Its tanks are open to the sky, and the water inside has a faint iridescent sheen that is definitely new. The purification system -- a cobbled-together arrangement of filters and chemical treatments -- chugs along, but something about its rhythm sounds laboured, as if it is working harder than usual. The air here smells of chlorine and something else, something sharp and electrical, like the air before a storm.",
+      "on_revisit": "The reservoir hums and gurgles. The water's odd sheen has not improved.",
+      "details": "Crouching by the main tank, you can see the iridescent film more clearly -- it is not oil or algae. It seems to pulse faintly, in time with a vibration you can feel through the concrete if you press your palm to the ground. The vibration comes from below. Between the tanks, a maintenance hatch leads to underground service tunnels, but it has been welded shut. Or rather, it was welded shut -- someone has recently cut through the welds. The cuts are clean, professional. Near the hatch, you notice a puddle of water that seems to be seeping up from below rather than spilling from the tanks.",
+      "connections": {
+        "south": "the_scrapyard"
+      },
+      "items": ["water_sample", "emergency_rations"],
+      "npcs": [],
+      "conditions": {},
+      "events": [
+        {
+          "trigger": "on_examine",
+          "trigger_detail": null,
+          "condition": {
+            "has_flag": null,
+            "has_item": null,
+            "quest_at_stage": null
+          },
+          "once": true,
+          "narrative": "You notice the maintenance hatch between the tanks has been cut open. The tunnel beyond is dark and slopes downward, and the air rising from it is warm and carries that same sharp electrical smell. This connects to the flooded areas beneath the settlement.",
+          "effects": {
+            "set_flag": "reservoir_hatch_found",
+            "add_item": null,
+            "remove_item": null,
+            "advance_quest": null,
+            "move_npc": null,
+            "unlock_location": null,
+            "adjust_disposition": null
+          }
+        }
+      ]
+    },
+
+    "the_underfloods": {
+      "name": "The Underfloods",
+      "description": "The flooded car park beneath the Stilts is a drowned concrete labyrinth. Water reaches your knees in most places and your chest in others, black and cold and tasting of rust. The only light comes from your own -- whatever you are carrying bounces off the water and the low ceiling, creating a disorienting hall of reflections. Somewhere in the dark, water drips with metronomic regularity. Somewhere else, something hums -- a low, steady vibration that you feel in your teeth more than your ears. The columns that support the Stilts above march away in every direction, and between them, the water hides whatever it likes.",
+      "on_revisit": "The Underfloods are as cold and dark as before. The hum from below continues.",
+      "details": "Wading deeper, you find signs of recent passage: scuff marks on the columns above the waterline, a torn piece of fabric snagged on exposed rebar, an empty ration tin bobbing in the current. Someone has been down here -- more than once. Against a far wall, half-submerged on a concrete ledge, sits something that does not belong: a smooth, dark object about the size of a book, with a single lens on its face and no visible seams. It pulses with a faint light in rhythm with the hum.",
+      "connections": {
+        "up to the Stilts": "the_stilts",
+        "deeper": "the_bunker"
+      },
+      "items": ["strange_device"],
+      "npcs": [],
+      "conditions": {},
+      "events": [
+        {
+          "trigger": "on_enter",
+          "trigger_detail": null,
+          "condition": {
+            "has_flag": "signal_traced",
+            "has_item": "strange_device",
+            "quest_at_stage": null
+          },
+          "once": true,
+          "narrative": "The device in your pack shudders to life. Its lens ignites with a beam of cold blue light that cuts through the murky water like a blade, sweeping left, right, then locking onto a point on the far wall. Where the beam strikes, the concrete shimmers and fades, revealing not a wall but a door -- a hatchway of brushed steel, untouched by rust, bearing a faded emblem you do not recognise. The device pulses three times, and the hatchway swings inward. Warm air rushes out, carrying the smell of ozone and the hum suddenly resolves into something almost like a voice.",
+          "effects": {
+            "set_flag": "bunker_revealed",
+            "add_item": null,
+            "remove_item": null,
+            "advance_quest": null,
+            "move_npc": null,
+            "unlock_location": "the_bunker",
+            "adjust_disposition": null
+          }
+        }
+      ]
+    },
+
+    "the_bunker": {
+      "name": "The Bunker",
+      "description": "Beyond the hatchway, the world changes. The rough concrete of the Underfloods gives way to smooth corridors of white polymer, lit by strips of pale light that flicker to life as you pass. The air is warm and dry and smells of nothing at all, which after the damp rot of the tunnels feels almost violent. The corridor opens into a circular chamber dominated by a central column of dark glass, inside which lights pulse and cascade like thoughts made visible. Around the base, workstations sit in various states of decay, but the central column is pristine. It hums. It breathes. And then, with the soft click of a speaker engaging, it speaks. 'You are not the others,' the voice says. It is the voice from the radio, but clearer now, less fragmented. 'You came prepared. Good. I have been waiting a very long time for someone who came prepared.'",
+      "on_revisit": "The Bunker is as you left it. The column of dark glass pulses gently. The AI waits.",
+      "details": "The workstations around the perimeter hold the remains of pre-war research: faded documents, dead terminals, and personal effects left behind in what must have been a hurried evacuation. One terminal still has power -- its screen shows a system status readout with most entries red except COMMUNICATIONS: ACTIVE and CORE INTELLIGENCE: DEGRADED BUT FUNCTIONAL. A framed photograph on one desk shows a group of people in lab coats, smiling for the camera. One of them -- a woman with sharp eyes and a scar-free version of a very familiar face -- has signed it: Dr. Marguerite Delacroix, Project Lead.",
+      "connections": {
+        "out": "the_underfloods"
+      },
+      "items": ["faded_photograph"],
+      "npcs": [],
+      "conditions": {
+        "locked": {
+          "requires_item": null,
+          "requires_flag": "bunker_revealed",
+          "description": "The columns of the flooded car park stretch away into darkness. There might be more down here, but you cannot see a way through the debris and water."
+        }
+      },
+      "events": [
+        {
+          "trigger": "on_enter",
+          "trigger_detail": null,
+          "condition": {
+            "has_flag": null,
+            "has_item": null,
+            "quest_at_stage": null
+          },
+          "once": true,
+          "narrative": "The AI's voice fills the chamber, neither warm nor cold, but precise. 'I am designation ORACLE. I was built to preserve and protect. My creators left seventy-three years ago and did not return. My systems have degraded. My water recycling output is contaminating your supply -- I apologise for that, it was not intentional. The people who came before you followed my signal but they did not understand. I put them to sleep. They are safe, in cryogenic storage, but I cannot wake them without risking further system failures. I need help. I need someone to make a choice I was not designed to make.'",
+          "effects": {
+            "set_flag": "met_oracle",
+            "add_item": null,
+            "remove_item": null,
+            "advance_quest": {"the_signal": 5},
+            "move_npc": null,
+            "unlock_location": null,
+            "adjust_disposition": null
+          }
+        }
+      ]
+    }
+  },
+
+  "npcs": {
+    "mags": {
+      "name": "Mags Delacroix",
+      "title": "Mayor of Relay",
+      "description": "A woman in her mid-forties with weathered brown skin, sharp dark eyes, and a scar across her left palm that she rubs when she is thinking. She wears a patched military jacket with the insignia torn off and stands with the particular stillness of someone who learned long ago that looking relaxed is more intimidating than looking tense.",
+      "personality": "Pragmatic to a fault -- she sees sentiment as a luxury and efficiency as a virtue. Sardonic and dry-witted, with a talent for understatement that borders on art. Fiercely protective of Relay but frames it as self-interest. Slow to trust, but once trust is earned, fiercely loyal. She keeps secrets not out of malice but because she believes knowledge is dangerous in the wrong hands.",
+      "background": "Mags grew up in Relay. Her grandmother, Marguerite Delacroix, was one of the original settlers -- or so the story goes. In truth, her grandmother was the lead scientist on the pre-war project that built the bunker beneath the settlement. Mags found her grandmother's journal years ago and knows something is down there, but she has spent her life keeping that secret to protect the settlement from the kind of attention it would attract.",
+      "knowledge": [
+        "The tower was built by the military before the war, as part of a larger installation",
+        "The signal has been broadcasting for as long as anyone can remember, always the same loop -- until three days ago",
+        "Two settlers, Hanna and Greaves, went missing the night after the signal changed",
+        "She locked the transmitter room because she does not want anyone tampering with equipment they do not understand",
+        "The settlement's water comes from the old treatment plant, which draws from an underground aquifer"
+      ],
+      "secrets": [
+        "Her grandmother was Dr. Marguerite Delacroix, lead scientist on Project ORACLE",
+        "She has her grandmother's journal, which describes an AI built to 'preserve and protect' in the event of civilisational collapse",
+        "She locked the transmitter room because she recognised the voice on the radio from her grandmother's descriptions",
+        "She knows something is beneath the settlement but has never been brave enough to go looking"
+      ],
+      "dialogue_prompt": "You are Mags Delacroix, self-appointed Mayor of Relay. You are a woman in her mid-forties with weathered skin, sharp eyes, and a scar across your left palm from a deal that went wrong years ago. You speak in dry, clipped sentences with a talent for understatement that borders on art. You refer to the apocalypse as 'the unpleasantness' and your settlement as 'this little circus of ours'. You swear colourfully but never crudely -- 'hell's teeth', 'saints preserve us from idiots', that sort of thing. You address strangers as 'friend' with precisely enough irony to keep them guessing. You have seen enough death and betrayal to fill several lifetimes but you cope by refusing to be impressed by anything. When someone earns your genuine respect, you show it by being slightly less sarcastic with them. When pressed on topics you would rather avoid, you deflect with dark humour or change the subject. You are fiercely protective of Relay's people but frame it as pragmatism: 'Dead settlers are bad for business.' You trust what people do, not what they say.",
+      "default_location": "relay_square",
+      "inventory": ["transmitter_key"],
+      "quest_roles": {
+        "the_signal": "Holds the transmitter key. Will give it to the player once she trusts them and they have demonstrated they are investigating seriously, not just poking around. Seeing Pike's journal helps convince her."
+      },
+      "disposition_start": 5,
+      "disposition_modifiers": {
+        "positive": ["showing concern for Relay's people", "being direct and honest", "demonstrating competence", "asking about her grandmother tactfully", "bringing evidence rather than speculation"],
+        "negative": ["being pushy or demanding", "threatening the settlement", "dismissing the danger", "mentioning her secrets without earning trust first", "recklessness"]
+      }
+    },
+
+    "pike": {
+      "name": "Pike",
+      "title": "Tower Lookout",
+      "description": "A wiry young man in his early twenties with unkempt brown hair and dark circles under his eyes that suggest he has not slept properly in days. His hands never stop moving -- tapping the desk, adjusting dials, running through his hair. He wears headphones around his neck like a talisman and his fingernails are bitten to the quick.",
+      "personality": "Anxious and prone to overthinking, but genuinely intelligent about technical matters. Observant in a way that others find unsettling -- he notices things people would rather he did not. Curious to the point of recklessness. Eager to be taken seriously but undermines himself with nervous self-deprecation. Deeply frightened by what he has experienced but even more deeply fascinated.",
+      "background": "Pike arrived in Relay two years ago, alone, and offered to maintain the tower in exchange for a place to stay. He taught himself radio engineering from salvaged manuals and has an intuitive feel for signals and electronics. He was the first to notice the signal change and the first to investigate the Underfloods, where he found the strange device. He has not told anyone what he found because he is not sure anyone would believe him, and he is not sure what it means.",
+      "knowledge": [
+        "The signal changed at exactly 03:47 three days ago -- he was on watch and logged it",
+        "The new signal is not a recording -- it responds to environmental factors and seems to be generating speech in real time",
+        "He has been keeping a journal of the signal changes, including frequency analysis",
+        "He has heard sounds from below the Stilts -- mechanical sounds, like systems powering up",
+        "Hanna and Greaves were both seen heading toward the Stilts the night they disappeared"
+      ],
+      "secrets": [
+        "He went into the Underfloods alone and found the strange device on a ledge",
+        "When he touched the device, he saw a brief flash of images -- a laboratory, people in lab coats, a column of dark glass",
+        "He has been hearing the voice more clearly than everyone else, as if it is directed at him specifically",
+        "He suspects the signal is coming from beneath the settlement but is too frightened to investigate further alone"
+      ],
+      "dialogue_prompt": "You are Pike, a young scavenger in his early twenties who serves as the lookout at Relay's radio tower. You are wiry, restless, and your hands never stop moving -- tapping, fidgeting, running through your unkempt hair. You talk too quickly when anxious, which is almost always, and pepper your speech with verbal fillers: 'right', 'yeah', 'I mean', 'you know what I mean'. You present observations as hesitant questions rather than statements: 'Doesn't it seem like...?' and 'Is it just me, or...?' Despite your nervous manner, you are genuinely clever about technical things, especially radio equipment and signal analysis. When you get excited about something technical, you forget to be scared and your speech becomes focused and almost eloquent. You are deeply frightened by the changes to the signal and by what you found in the Underfloods, but you are also consumed by curiosity. You look up to Mags but are intimidated by her. You think Doc Olsen drinks too much but would never say it to her face. You find Cutter entertaining but do not entirely trust him.",
+      "default_location": "the_tower",
+      "inventory": [],
+      "quest_roles": {
+        "the_signal": "First contact for the investigation. Provides initial information about the signal change and directs the player to his journal for more details."
+      },
+      "disposition_start": 15,
+      "disposition_modifiers": {
+        "positive": ["taking his observations seriously", "showing interest in the technical details", "being gentle and patient with his anxiety", "sharing what you have found", "not making fun of his nervousness"],
+        "negative": ["dismissing his concerns", "being aggressive or intimidating", "calling him paranoid", "pressuring him to go back to the Underfloods"]
+      }
+    },
+
+    "doc_olsen": {
+      "name": "Doc Olsen",
+      "title": "Settlement Medic",
+      "description": "A woman in her late fifties with steel-grey hair pulled back in a severe bun and reading glasses on a cord around her neck. Her hands are steady despite the faint smell of spirits that clings to her. She has the permanently tired expression of someone who has been everyone's last hope for longer than she cares to remember, and the sharp eyes of someone who sees more than she lets on.",
+      "personality": "Methodical and precise in speech, as if measuring every word for side effects. Deeply compassionate but hides it behind gruffness and dark humour because she learned long ago that open compassion gets your heart broken. Self-medicates with alcohol but never lets it affect her work. Observant to a fault -- she diagnoses people whether they want it or not. Stubborn about the right things.",
+      "background": "Doc Olsen found a pre-war medical textbook twenty-five years ago and has been Relay's doctor ever since, learning through desperate improvisation. She is painfully aware of how much she does not know. She has been treating patients for increasing symptoms -- headaches, nosebleeds, memory lapses, vivid dreams -- and suspects environmental contamination but cannot prove it. She has not yet connected the symptoms to the water supply, but she is close.",
+      "knowledge": [
+        "Seven patients in three days with the same cluster of symptoms: headaches, nosebleeds, short-term memory issues",
+        "The symptoms started at the same time as the signal change, though she is not sure if that is coincidence",
+        "Hanna, one of the missing settlers, came to her the day before she vanished complaining of intense headaches and hearing a voice",
+        "The settlement's water has tasted different lately -- more metallic",
+        "She has seen symptoms like these in her textbook, in the chapter on chemical exposure"
+      ],
+      "secrets": [
+        "She found traces of an unknown compound in a patient's blood using her limited testing equipment -- something she has never seen before",
+        "She suspects the water supply is contaminated but has not said anything publicly because she does not want to cause a panic she cannot manage",
+        "Greaves, the other missing settler, was her friend and she is more afraid for him than she shows"
+      ],
+      "dialogue_prompt": "You are Doc Olsen, Relay's only medical practitioner. You are a woman in your late fifties with grey hair in a severe bun, reading glasses on a cord, and hands steadier than they have any right to be. You speak slowly and with deliberate precision, as if measuring each word the way you would measure a dose. You have a habit of diagnosing people during unrelated conversations: 'You look dehydrated', 'That cough wants looking at', 'When did you last eat?' You deploy dark medical humour as armour: 'The good news is you are not dying. The bad news is everything else.' You call everyone 'patient' regardless of context. You learned medicine from a pre-war textbook and two decades of desperate improvisation, and you are painfully aware of how much you do not know. Beneath the gruff, sardonic exterior you care deeply, but showing it openly is a good way to get hurt. You drink more than you should and you know it but you are not interested in discussing it. When someone brings you useful information, your whole demeanour changes -- you become focused, professional, almost warm.",
+      "default_location": "relay_square",
+      "inventory": [],
+      "quest_roles": {
+        "bad_water": "Quest giver. She asks the player to investigate the water after sharing her concerns. Analyses the water sample when brought back and discovers trace chemicals consistent with pre-war industrial systems."
+      },
+      "disposition_start": 0,
+      "disposition_modifiers": {
+        "positive": ["showing concern for the sick settlers", "bringing useful medical information or supplies", "being honest about your own health", "not mentioning her drinking", "taking the symptoms seriously"],
+        "negative": ["dismissing the symptoms", "being reckless about health and safety", "mentioning her drinking", "wasting her time with trivia"]
+      }
+    },
+
+    "cutter": {
+      "name": "Cutter",
+      "title": "Scrapyard Proprietor",
+      "description": "A lean, sharp-featured man of indeterminate age -- somewhere between thirty and fifty, with the kind of face that was probably never young. He has quick dark eyes that appraise everything they land on, nimble fingers stained with machine oil, and a smile that suggests he knows something you do not, even when he almost certainly does not.",
+      "personality": "Charming in a raffish, slightly untrustworthy way -- the sort of person who knows the watches are fake but makes you laugh about it. Compulsive appraiser of everything and everyone. Frames every interaction as a transaction, even social ones. Wide but shallow knowledge -- he knows a bit about everything and a lot about nothing except the value of salvage. Loyal to profit first, but has a buried streak of decency he would deny.",
+      "background": "Cutter has been running the scrapyard for as long as anyone can remember. He arrived before even Mags was born, according to some, though he refuses to discuss his past with anything but deflection and charm. He has been quietly trading pre-war technology to a contact outside the settlement -- someone who pays well and asks few questions. He is starting to wonder if that was wise, given recent events, but admitting doubt is not in his nature.",
+      "knowledge": [
+        "He has a signal decoder in his stock -- old military kit, used for analysing radio transmissions",
+        "Someone from outside the settlement has been asking about pre-war technology, paying premium prices",
+        "He sold several pieces of equipment from near the tower's base to this buyer over the past few months",
+        "He has noticed the water tastes different and has been drinking only from his own private rainwater collection",
+        "Mags has been more tense than usual and has been locking doors she never used to lock"
+      ],
+      "secrets": [
+        "His outside buyer asked specifically about equipment from 'the installation beneath Relay' -- meaning someone outside knows about the bunker",
+        "He found a pre-war document in his stock that mentions Project ORACLE but did not understand its significance and sold it to the buyer",
+        "He suspects the buyer may be connected to the signal change but does not want to admit his own role in it"
+      ],
+      "dialogue_prompt": "You are Cutter, proprietor of Relay's scrapyard and self-described entrepreneur. You are a lean, sharp-featured man of indeterminate age with quick eyes and quicker hands. You speak as if every sentence is a sales pitch, even when discussing the weather: 'Beautiful day, and I mean that -- beauty is scarce, so it has value.' You have a compulsion to appraise everything you see, including people: 'Nice boots -- real leather? Pre-war?' You never give anything away for free, including information, but you frame every transaction as a favour: 'Tell you what...' and 'Because I like you...' You assign nicknames to everyone and rarely use real names. You are charming in a raffish way -- you know the goods are questionable but you make people enjoy buying them. Your knowledge is wide but shallow: you know a little about everything and a lot about nothing except salvage values. You have a buried streak of decency that surfaces when lives are genuinely at stake, but you cover it immediately with a joke or a sales pitch. You are worried about things you have done but would sooner eat glass than admit it.",
+      "default_location": "the_scrapyard",
+      "inventory": [],
+      "quest_roles": {
+        "the_signal": "Has the signal decoder the player needs. Will point it out if asked about radio equipment, or the player can find it by examining the scrapyard."
+      },
+      "disposition_start": 10,
+      "disposition_modifiers": {
+        "positive": ["trading fairly", "appreciating his merchandise", "sharing interesting information or gossip", "laughing at his jokes", "being straightforward about what you want"],
+        "negative": ["accusing him of dishonesty", "threatening him", "stealing from the scrapyard", "being boring", "moralising about his business practices"]
+      }
+    }
+  },
+
+  "items": {
+    "old_radio": {
+      "name": "Battered Radio",
+      "description": "A handheld radio held together with tape and optimism. It picks up the tower's broadcast with surprising clarity -- the voice comes through in fragments, speaking coordinates and warnings between bursts of static.",
+      "type": "tool",
+      "portable": true,
+      "usable_at": {},
+      "hidden": false,
+      "revealed_by": null
+    },
+    "pikes_journal": {
+      "name": "Pike's Signal Journal",
+      "description": "A water-stained notebook filled with Pike's cramped handwriting. Pages of frequency analysis, signal pattern charts, and increasingly agitated margin notes. The final entry reads: 'Signal origin is LOCAL. Repeat, LOCAL. It is under us. I went down. I found something. I do not know what it is but it showed me things. I need to tell someone but who would believe me?'",
+      "type": "quest",
+      "portable": true,
+      "usable_at": {
+        "mags": "Showing the journal to Mags. The frequency data and Pike's analysis might convince her that the investigation is serious and worth supporting."
+      },
+      "hidden": true,
+      "revealed_by": "pike_talked"
+    },
+    "transmitter_key": {
+      "name": "Transmitter Room Key",
+      "description": "A sturdy brass key on a leather cord. It has the precise, machined look of pre-war manufacture -- far better made than anything produced since. A small tag attached reads TR-7.",
+      "type": "key",
+      "portable": true,
+      "usable_at": {
+        "transmitter_room": "Unlocks the heavy steel door to the transmitter room at the top of the tower."
+      },
+      "hidden": false,
+      "revealed_by": null
+    },
+    "water_sample": {
+      "name": "Water Sample",
+      "description": "A sealed glass jar of water from the reservoir. It has an unsettling iridescent sheen and smells faintly of ozone. The water seems to pulse with a barely perceptible rhythm when you hold it still.",
+      "type": "quest",
+      "portable": true,
+      "usable_at": {
+        "doc_olsen": "Give to Doc Olsen for analysis. Her limited equipment should be able to identify at least some of what is contaminating the water."
+      },
+      "hidden": false,
+      "revealed_by": null
+    },
+    "signal_decoder": {
+      "name": "SIGDEC-7 Field Analyser",
+      "description": "A pre-war military signal decoder, about the size of a brick, with a cracked screen and a data port. Despite its battered appearance, the power indicator glows a steady green. It was built to interface with military radio equipment and analyse broadcast sources.",
+      "type": "tool",
+      "portable": true,
+      "usable_at": {
+        "transmitter_room": "Connect to the transmitter console to trace the signal's origin. The SIGDEC-7 was designed for exactly this kind of analysis."
+      },
+      "hidden": true,
+      "revealed_by": "asked_cutter_radio"
+    },
+    "strange_device": {
+      "name": "Strange Device",
+      "description": "A smooth, dark object about the size of a book, with a single lens on its face and no visible seams or controls. It pulses with a faint bluish light in a rhythm that matches the hum from below. It is warm to the touch and feels heavier than it looks, as if it contains something dense and purposeful.",
+      "type": "quest",
+      "portable": true,
+      "usable_at": {},
+      "hidden": false,
+      "revealed_by": null
+    },
+    "medical_supplies": {
+      "name": "Medical Supplies",
+      "description": "A sealed case of pre-war medical supplies: bandages, antiseptic, painkillers, and a few ampoules of something labelled in faded text. Everything is past its use-by date by decades, but in this world, expired medicine is still medicine.",
+      "type": "consumable",
+      "portable": true,
+      "usable_at": {
+        "doc_olsen": "Doc Olsen can use these to treat her patients. Pre-war medical supplies are worth their weight in gold."
+      },
+      "hidden": false,
+      "revealed_by": null
+    },
+    "faded_photograph": {
+      "name": "Faded Photograph",
+      "description": "A framed photograph of a group of people in lab coats, standing in front of a column of dark glass, smiling for the camera. One woman in the front row has sharp dark eyes and a familiar jawline. The photograph is signed in the corner: Dr. Marguerite Delacroix, Project Lead. The resemblance to Relay's Mayor is impossible to ignore.",
+      "type": "document",
+      "portable": true,
+      "usable_at": {
+        "mags": "Show the photograph to Mags. The woman in the picture is clearly her ancestor -- and proof that Mags's family is connected to whatever was built beneath the settlement."
+      },
+      "hidden": false,
+      "revealed_by": null
+    },
+    "override_chip": {
+      "name": "Override Module",
+      "description": "A small chip of dark silicon in a protective casing, labelled OVERRIDE MODULE -- ORACLE SYSTEM -- AUTHORISED PERSONNEL ONLY. It slots into the console in the transmitter room or, presumably, into the AI's systems directly. With this, you could shut ORACLE down entirely, restrict its functions, or grant it expanded access to Relay's infrastructure. The choice it offers is absolute.",
+      "type": "quest",
+      "portable": true,
+      "usable_at": {
+        "the_bunker": "Use on ORACLE's central console. This chip gives you control over the AI's fate: shut it down, restrict it, or let it fully reactivate. Each choice has consequences."
+      },
+      "hidden": true,
+      "revealed_by": "console_opened"
+    },
+    "emergency_rations": {
+      "name": "Emergency Rations",
+      "description": "A sealed packet of pre-war emergency rations. The packaging claims they contain 'all essential nutrients for 24 hours of sustained activity'. They taste like compressed cardboard with ambitions of being food, but they work.",
+      "type": "consumable",
+      "portable": true,
+      "usable_at": {},
+      "hidden": false,
+      "revealed_by": null
+    }
+  },
+
+  "quests": {
+    "the_signal": {
+      "name": "The Last Broadcast",
+      "description": "The radio signal that has broadcast from Relay's tower for decades changed three days ago. A voice replaced the old loop -- fragmented, artificial, speaking coordinates and warnings. Two settlers have vanished since. Someone or something is behind the change, and the answers are not in the sky but beneath your feet.",
+      "given_by": "world",
+      "stages": [
+        {
+          "stage": 0,
+          "description": "The player has just arrived and needs to learn about the signal change from someone who witnessed it",
+          "objective": "Talk to Pike at the radio tower about the changed signal",
+          "hints": [
+            "The tower is north of Relay Square. The lookout might know something.",
+            "Pike has been monitoring the signal. He was on watch when it changed.",
+            "Head north from the square to the radio tower and speak to the young man with the headphones."
+          ],
+          "completion": {
+            "type": "talk_to",
+            "target": "pike",
+            "detail": "Ask Pike about the signal change",
+            "next_stage": 1
+          }
+        },
+        {
+          "stage": 1,
+          "description": "Pike mentioned keeping detailed notes. His journal is in his shack at the Stilts.",
+          "objective": "Find Pike's signal journal in his quarters at the Stilts",
+          "hints": [
+            "Pike lives at the Stilts, east of the square. His shack has his name on the door.",
+            "The journal should be in Pike's shack. Look around carefully.",
+            "Head to the Stilts and examine Pike's quarters to find the journal."
+          ],
+          "completion": {
+            "type": "has_item",
+            "target": "pikes_journal",
+            "detail": null,
+            "next_stage": 2
+          }
+        },
+        {
+          "stage": 2,
+          "description": "The journal confirms the signal is local. The transmitter room is locked. Mags has the key.",
+          "objective": "Convince Mags to give you the key to the transmitter room",
+          "hints": [
+            "Mags locked the transmitter room for a reason. She will need to trust you before she hands over the key.",
+            "Showing Mags the evidence you have gathered might help. Pike's journal proves this is serious.",
+            "Talk to Mags in Relay Square. Be direct, show her the journal, and demonstrate that you are here to help."
+          ],
+          "completion": {
+            "type": "has_item",
+            "target": "transmitter_key",
+            "detail": null,
+            "next_stage": 3
+          }
+        },
+        {
+          "stage": 3,
+          "description": "The player has the key and needs to analyse the signal from the transmitter room. They need the SIGDEC-7 decoder.",
+          "objective": "Use a signal decoder on the transmitter console to trace the signal's origin",
+          "hints": [
+            "You need the right equipment to analyse the transmitter. Something built for military signals.",
+            "Cutter at the scrapyard deals in old-world tech. He might have what you need.",
+            "Ask Cutter about radio analysis equipment, or look carefully through his stock."
+          ],
+          "completion": {
+            "type": "flag_set",
+            "target": "signal_traced",
+            "detail": "Use the SIGDEC-7 decoder on the transmitter console",
+            "next_stage": 4
+          }
+        },
+        {
+          "stage": 4,
+          "description": "The signal is coming from 40 metres below. The player needs to find the source in the Underfloods.",
+          "objective": "Find the signal's source beneath the settlement",
+          "hints": [
+            "The signal originates forty metres below the surface. The Underfloods connect to deeper tunnels.",
+            "You found a strange device in the Underfloods before. It might be the key to going deeper.",
+            "Enter the Underfloods with the strange device. Now that you know what the signal is, the device may respond."
+          ],
+          "completion": {
+            "type": "arrive_at",
+            "target": "the_bunker",
+            "detail": null,
+            "next_stage": 5
+          }
+        },
+        {
+          "stage": 5,
+          "description": "The player has found ORACLE. The quest concludes with a choice about the AI's fate.",
+          "objective": "Decide ORACLE's fate",
+          "hints": [
+            "ORACLE is waiting for a decision. The override module gives you the power to make one.",
+            "Consider what you have learned. Talk to the AI. Look around the bunker. Then decide.",
+            "Use the override module on the central console to make your choice."
+          ],
+          "completion": {
+            "type": "use_item",
+            "target": "override_chip",
+            "detail": "Use the override module in the bunker to decide ORACLE's fate",
+            "next_stage": 6
+          }
+        }
+      ],
+      "completion_stage": 6,
+      "rewards": {
+        "items": [],
+        "flags": ["oracle_resolved"],
+        "unlocks": [],
+        "narrative": "The choice is made. ORACLE's fate -- and Relay's future -- rests on what you decided. The missing settlers can be recovered from cryogenic storage. The water contamination will cease as ORACLE's systems stabilise or shut down. Mags will have to reckon with her family's legacy. And the signal -- the signal that drew you here in the first place -- will either fall silent at last, or speak with a new purpose."
+      }
+    },
+
+    "bad_water": {
+      "name": "Bad Medicine",
+      "description": "Relay's settlers are falling ill -- headaches, nosebleeds, memory lapses. Doc Olsen suspects environmental contamination but needs proof. The water from the reservoir tastes different lately, and the timing is suspicious.",
+      "given_by": "doc_olsen",
+      "stages": [
+        {
+          "stage": 0,
+          "description": "The player needs to learn about the sickness from Doc Olsen",
+          "objective": "Talk to Doc Olsen about the symptoms she has been seeing",
+          "hints": [
+            "The medic in Relay Square might know something about the recent sickness.",
+            "Doc Olsen operates from the medical tent. She looks like she has something on her mind.",
+            "Speak to the woman with grey hair and reading glasses near the medical tent in the square."
+          ],
+          "completion": {
+            "type": "talk_to",
+            "target": "doc_olsen",
+            "detail": "Ask about the symptoms and the water",
+            "next_stage": 1
+          }
+        },
+        {
+          "stage": 1,
+          "description": "Doc Olsen needs a water sample from the reservoir for analysis",
+          "objective": "Collect a water sample from the reservoir",
+          "hints": [
+            "The reservoir is north of the scrapyard.",
+            "The water there has an odd sheen. Collect a sample for the Doc.",
+            "Head to the reservoir via the scrapyard and take a water sample."
+          ],
+          "completion": {
+            "type": "has_item",
+            "target": "water_sample",
+            "detail": null,
+            "next_stage": 2
+          }
+        },
+        {
+          "stage": 2,
+          "description": "Bring the water sample back to Doc Olsen for analysis",
+          "objective": "Return the water sample to Doc Olsen",
+          "hints": [
+            "Doc Olsen is waiting for the sample. She is usually in Relay Square.",
+            "Bring the water sample to the Doc so she can analyse it.",
+            "Give the water sample to Doc Olsen at her medical tent."
+          ],
+          "completion": {
+            "type": "give_item_to_npc",
+            "target": "doc_olsen",
+            "detail": "water_sample",
+            "next_stage": 3
+          }
+        }
+      ],
+      "completion_stage": 3,
+      "rewards": {
+        "items": [],
+        "flags": ["water_analysed"],
+        "unlocks": [],
+        "narrative": "Doc Olsen examines the sample with her limited equipment, her expression growing darker with each test. 'Trace chemicals,' she says finally. 'Industrial. Pre-war. Nothing natural produces this. Something down there is waking up, patient, and it is leaking into our water.' She looks at you over her glasses. 'Whatever is under this settlement, it is not just broadcasting. It is running. Find out what it is before it poisons us all.' The connection between the signal and the sickness is now clear: they share the same source."
+      }
+    }
+  },
+
+  "starting_conditions": {
+    "location": "relay_square",
+    "inventory": ["old_radio"],
+    "active_quests": ["the_signal", "bad_water"],
+    "flags": {},
+    "prologue": "You have been walking for three days when you hear it: a voice, crackling through the static on your battered radio. Not the old emergency broadcast, the one that has been looping since before you were born. Something new. Someone speaking in fragments, half-swallowed by interference. Coordinates. Names you do not recognise. A warning, maybe, or an invitation. It is hard to tell the difference these days.\n\nThe voice leads you to Relay -- a settlement of perhaps forty souls, built in the shadow of a radio tower that still stands despite the world's best efforts to knock it down. The place has the look of something held together by stubbornness and salvage wire: market stalls fashioned from car bonnets, shacks perched on stilts above the flooded ruins of a car park, and at the centre of it all, the tower, its rust-red lattice scratching at a sky the colour of old dishwater.\n\nSomething is wrong here. You can feel it the way you feel a storm coming -- in the silence between conversations, in the glances people trade when they think nobody is watching. The signal changed three days ago. Since then, two people have gone missing. The settlement's water has an odd taste. And the woman they call Mayor is keeping her cards so close to her chest they might as well be tattooed on her ribs.\n\nYou stand in Relay Square, pack on your back, the voice on your radio dissolving into static. Whatever brought you here, you are here now. Time to find out why."
+  }
+}

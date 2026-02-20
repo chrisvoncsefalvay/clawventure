@@ -1,0 +1,17 @@
+{
+  "name": "clawventure",
+  "description": "Interactive fiction engine for Claude Code. Create rich adventure settings with NPCs, quests and items, then play them as choose-your-adventure games with AI-driven dialogue and dynamic narration.",
+  "version": "2.0.0",
+  "author": {
+    "name": "Chris von Csefalvay"
+  },
+  "license": "MIT",
+  "keywords": [
+    "interactive-fiction",
+    "adventure",
+    "game",
+    "rpg",
+    "choose-your-adventure",
+    "narrative"
+  ]
+}

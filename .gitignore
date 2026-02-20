@@ -1,0 +1,23 @@
+# Game output files (generated at runtime, not part of the plugin)
+setting.json
+state.json
+memory.json
+transcript.md
+world.json
+locations/
+npcs/
+quests/
+items.json
+!examples/setting.json
+!examples/state.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

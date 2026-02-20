@@ -1,0 +1,57 @@
+{
+  "setting_file": "setting.json",
+  "player": {
+    "name": "",
+    "description": "",
+    "location": "relay_square",
+    "inventory": ["old_radio"],
+    "health": 100
+  },
+  "quests": {
+    "the_signal": {
+      "status": "available",
+      "current_stage": 0,
+      "log": []
+    },
+    "bad_water": {
+      "status": "available",
+      "current_stage": 0,
+      "log": []
+    }
+  },
+  "npc_state": {
+    "mags": {
+      "disposition": 5,
+      "met": false,
+      "conversation_count": 0,
+      "gave_items": [],
+      "location_override": null
+    },
+    "pike": {
+      "disposition": 15,
+      "met": false,
+      "conversation_count": 0,
+      "gave_items": [],
+      "location_override": null
+    },
+    "doc_olsen": {
+      "disposition": 0,
+      "met": false,
+      "conversation_count": 0,
+      "gave_items": [],
+      "location_override": null
+    },
+    "cutter": {
+      "disposition": 10,
+      "met": false,
+      "conversation_count": 0,
+      "gave_items": [],
+      "location_override": null
+    }
+  },
+  "world_flags": {},
+  "visited_locations": [],
+  "turn": 0,
+  "history": [],
+  "fired_events": []
+}

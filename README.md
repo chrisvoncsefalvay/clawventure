@@ -1,5 +1,12 @@
 # Clawventure -- interactive fiction engine for Claude Code
 
+#                                                                           
+#                                                                           
+#    ▄█████ ▄▄     ▄▄▄  ▄▄   ▄▄ ▄▄ ▄▄ ▄▄▄▄▄ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄  ▄▄▄▄▄ 
+#    ██     ██    ██▀██ ██ ▄ ██ ██▄██ ██▄▄  ███▄██   ██   ██ ██ ██▄█▄ ██▄▄  
+#    ▀█████ ██▄▄▄ ██▀██  ▀█▀█▀   ▀█▀  ██▄▄▄ ██ ▀██   ██   ▀███▀ ██ ██ ██▄▄▄ 
+#                                                                           
+
 _A completely idiotic idea by [Chris von Csefalvay](https://chrisvoncsefalvay.com)._
 
 Clawventure is a plugin that turns Claude Code into a choose-your-adventure game engine. Create richly detailed worlds with interconnected locations, NPCs with distinct personalities, items and multi-stage quests, then play through them with AI-driven dialogue and dynamic narration.
